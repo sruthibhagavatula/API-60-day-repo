@@ -1,0 +1,736 @@
+{
+	"info": {
+		"_postman_id": "aceefe06-cf03-44cc-a3df-f75034c87e35",
+		"name": "60days API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Day1",
+			"item": [
+				{
+					"name": "Covid API",
+					"item": [
+						{
+							"name": "Response of all countries",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://covid-19.dataflowkit.com/v1",
+									"protocol": "https",
+									"host": [
+										"covid-19",
+										"dataflowkit",
+										"com"
+									],
+									"path": [
+										"v1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Response of Current country",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "e4351525-141e-41f2-8b24-6599f6eb0f73",
+										"exec": [
+											"pm.test(\"Status code is 200 for Covid cases in India\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"pm.test(\"Covid cases in India Json response\", function () {\r",
+											"   pm.response.to.be.json;\r",
+											"});\r",
+											"pm.test(\"Response time is less than 600ms for covid cases in India\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(600);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://covid-19.dataflowkit.com/v1/India",
+									"protocol": "https",
+									"host": [
+										"covid-19",
+										"dataflowkit",
+										"com"
+									],
+									"path": [
+										"v1",
+										"India"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Top5 countries with highest new cases",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "0c202bcb-f780-4570-8a68-7a8bd3556ae1",
+										"exec": [
+											"var resp = pm.response.json();\r",
+											"console.log(resp);\r",
+											"\r",
+											"resp.data.rows.forEach(function(entry){\r",
+											"    var country = entry.country;\r",
+											"    var new_cases = entry.new_cases;\r",
+											"    if(country != \"World\"){\r",
+											"        console.log(country+\" : \"+new_cases);\r",
+											"     }   \r",
+											"\r",
+											"})\r",
+											"\r",
+											"pm.test(\"Status code is 200 for Covid cases in India\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"pm.test(\"Covid cases in India Json response\", function () {\r",
+											"   pm.response.to.be.json;\r",
+											"});\r",
+											"pm.test(\"Response time is less than 600ms for covid cases in India\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(600);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://corona-virus-stats.herokuapp.com/api/v1/cases/countries-search?page=1&how=asc&limit=5&order=new_cases",
+									"protocol": "https",
+									"host": [
+										"corona-virus-stats",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"api",
+										"v1",
+										"cases",
+										"countries-search"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "cou",
+											"value": "5",
+											"disabled": true
+										},
+										{
+											"key": "how",
+											"value": "asc"
+										},
+										{
+											"key": "limit",
+											"value": "5"
+										},
+										{
+											"key": "order",
+											"value": "new_cases"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Top5 countries with lowest new deaths",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "49293926-1331-4c57-b873-c224fb8263c1",
+										"exec": [
+											"var resp = pm.response.json();\r",
+											"console.log(resp);\r",
+											"\r",
+											"resp.data.rows.forEach(function(entry){\r",
+											"    var country = entry.country;\r",
+											"    var new_deaths = entry.new_deaths;\r",
+											"     console.log(country+\" : \"+new_deaths);\r",
+											"     \r",
+											"\r",
+											"})\r",
+											"pm.test(\"Status code is 200 for Covid cases in India\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"pm.test(\"Covid cases in India Json response\", function () {\r",
+											"   pm.response.to.be.json;\r",
+											"});\r",
+											"pm.test(\"Response time is less than 600ms for covid cases in India\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(600);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://corona-virus-stats.herokuapp.com/api/v1/cases/countries-search?page=1&how=asc&limit=5&order=new_deaths",
+									"protocol": "https",
+									"host": [
+										"corona-virus-stats",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"api",
+										"v1",
+										"cases",
+										"countries-search"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "cou",
+											"value": "5",
+											"disabled": true
+										},
+										{
+											"key": "how",
+											"value": "asc"
+										},
+										{
+											"key": "limit",
+											"value": "5"
+										},
+										{
+											"key": "order",
+											"value": "new_deaths"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Highest New Cases",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "720a1a67-084d-4f08-81db-0b862594c6ec",
+										"exec": [
+											"  \r",
+											"// get response\r",
+											"var resp = pm.response.json();\r",
+											"console.log(resp);\r",
+											"\r",
+											"//print resp count\r",
+											"var count = resp.length;\r",
+											"console.log(count);\r",
+											"var countrieswithNewCasesInRecentDay = 0;\r",
+											"console.log(\"count: \"+count);\r",
+											"        var currTime = new Date().getTime();\r",
+											"     //   console.log(\"currTime :\"+currTime);\r",
+											"        var last24thHr = 24*60*60*1000\r",
+											"      //  console.log(\"last24thHr :\"+last24thHr)\r",
+											"        var expectedLastUpdated = currTime - last24thHr\r",
+											"   var countrieswithNewCasesArray = [];\r",
+											"   for(var i = 0; i < count-1; i++){\r",
+											"        var innerArray = [];\r",
+											"    var country = resp[i][\"Country_text\"];\r",
+											"    var LastUpdated = resp[i][\"Last Update\"];\r",
+											"    var lastUpdatedMS = new Date(LastUpdated).getTime();\r",
+											"      var new_cases = resp[i][\"New Cases_text\"];\r",
+											"    if(lastUpdatedMS > expectedLastUpdated &&  new_cases != \"\")\r",
+											"   \r",
+											"    { \r",
+											"        // console.log(country+\" : \"+new_cases);\r",
+											"          var new_cases_count = new_cases.replace(/[+,]/g, '');\r",
+											"     //   console.log(country+\" : \"+new_cases_count);\r",
+											"        innerArray.push(country,Number(new_cases_count));\r",
+											"        countrieswithNewCasesInRecentDay++;\r",
+											"        countrieswithNewCasesArray.push(innerArray);\r",
+											"         \r",
+											"    }\r",
+											"//});\r",
+											"   \r",
+											"};\r",
+											"console.log(\"countrieswithNewCasesInRecentDay: \"+countrieswithNewCasesInRecentDay);\r",
+											"console.log(\"countrieswithNewCasesArray: \"+countrieswithNewCasesArray.length);\r",
+											"\r",
+											"var sortedArray = sortByColumn(countrieswithNewCasesArray,1);\r",
+											"function sortByColumn(a, colIndex){\r",
+											"\r",
+											"    a.sort(sortFunction);\r",
+											"\r",
+											"    function sortFunction(a, b) {\r",
+											"        if (a[colIndex] === b[colIndex]) {\r",
+											"            return 0;\r",
+											"        }\r",
+											"        else {\r",
+											"            return (a[colIndex] > b[colIndex]) ? -1 : 1;\r",
+											"        }\r",
+											"    }\r",
+											"\r",
+											"    return a;\r",
+											"}\r",
+											"var top5 = 0;\r",
+											"for(var outerindex = 0; outerindex < sortedArray.length; outerindex++){\r",
+											"    if(sortedArray[outerindex][0] != \"World\" && top5 < 5){\r",
+											"         console.log(sortedArray[outerindex][0]+\" : \"+sortedArray[outerindex][1]); \r",
+											"         top5++;\r",
+											"    }\r",
+											"  \r",
+											"};\r",
+											"\r",
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response time is less than 600ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(600);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"verify content type of response as json\", function () {\r",
+											"    \r",
+											"     pm.response.to.be.json;\r",
+											"\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://covid-19.dataflowkit.com/v1",
+									"protocol": "https",
+									"host": [
+										"covid-19",
+										"dataflowkit",
+										"com"
+									],
+									"path": [
+										"v1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "sort",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "c0da8b21-f0af-43a7-88de-e607df73a95b",
+										"exec": [
+											"// get response\r",
+											"var resp = pm.response.json();\r",
+											"console.log(resp);\r",
+											"\r",
+											"//print resp count\r",
+											"var count = resp.length;\r",
+											"console.log(count);\r",
+											"\r",
+											"var countrieswithNewCasesInRecentDay = 0;\r",
+											"console.log(\"count: \"+count);\r",
+											"        var currTime = new Date().getTime();\r",
+											"     //   console.log(\"currTime :\"+currTime);\r",
+											"        var last24thHr = 24*60*60*1000\r",
+											"      //  console.log(\"last24thHr :\"+last24thHr)\r",
+											"\r",
+											"        var expectedLastUpdated = currTime - last24thHr\r",
+											"\r",
+											"\r",
+											"   for(var i = 0; i < count; i++){\r",
+											"    var country = resp[i][\"Country_text\"];\r",
+											"    var LastUpdated = resp[i][\"Last Update\"];\r",
+											"    var lastUpdatedMS = new Date(LastUpdated).getTime();\r",
+											"   \r",
+											"    pm.test(\"Test if New Cases_text updated in last 24hrs(Recent Day)\", function () {\r",
+											"         var new_cases = resp[i][\"New Cases_text\"];\r",
+											"    if( pm.expect(lastUpdatedMS).to.be.above(expectedLastUpdated) && pm.expect(new_cases).not.equal(\"\"))\r",
+											"    {  \r",
+											"        console.log(country+\" : \"+new_cases);\r",
+											"        countrieswithNewCasesInRecentDay++;\r",
+											"         \r",
+											"    }\r",
+											"});\r",
+											"   \r",
+											"};\r",
+											"console.log(\"countrieswithNewCasesInRecentDay: \"+countrieswithNewCasesInRecentDay);\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://covid-19.dataflowkit.com/v1",
+									"protocol": "https",
+									"host": [
+										"covid-19",
+										"dataflowkit",
+										"com"
+									],
+									"path": [
+										"v1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Lowest new Death cases",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "4eff4fda-9b99-47db-a1dd-f2fc03c3e65a",
+										"exec": [
+											"  \r",
+											"// get response\r",
+											"var resp = pm.response.json();\r",
+											"console.log(resp);\r",
+											"\r",
+											"//print resp count\r",
+											"var count = resp.length;\r",
+											"console.log(count);\r",
+											"var countrieswithlowestDeathCasesInRecentDay = 0;\r",
+											"console.log(\"count: \"+count);\r",
+											"        var currTime = new Date().getTime();\r",
+											"     //   console.log(\"currTime :\"+currTime);\r",
+											"        var last24thHr = 24*60*60*1000\r",
+											"      //  console.log(\"last24thHr :\"+last24thHr)\r",
+											"        var expectedLastUpdated = currTime - last24thHr\r",
+											"   var countrieswithlowestDeathCasesArray = [];\r",
+											"   for(var i = 0; i < count-1; i++){\r",
+											"        var innerArray = [];\r",
+											"    var country = resp[i][\"Country_text\"];\r",
+											"    var LastUpdated = resp[i][\"Last Update\"];\r",
+											"    var lastUpdatedMS = new Date(LastUpdated).getTime();\r",
+											"      var new_deaths = resp[i][\"New Deaths_text\"];\r",
+											"    if(lastUpdatedMS > expectedLastUpdated &&   new_deaths!= \"\")\r",
+											"   \r",
+											"    { \r",
+											"         var new_deaths_count = new_deaths.replace(/[+,]/g, '');\r",
+											"            innerArray.push(country,Number(new_deaths_count));\r",
+											"        countrieswithlowestDeathCasesInRecentDay++;\r",
+											"        countrieswithlowestDeathCasesArray.push(innerArray);\r",
+											"         \r",
+											"    }\r",
+											"//});\r",
+											"   \r",
+											"};\r",
+											"console.log(\"countrieswithlowestDeathCasesInRecentDay: \"+countrieswithlowestDeathCasesInRecentDay);\r",
+											"console.log(\"countrieswithlowestDeathCasesArray: \"+countrieswithlowestDeathCasesArray.length);\r",
+											"\r",
+											"var sortedArray = sortByColumn(countrieswithlowestDeathCasesArray,1);\r",
+											"function sortByColumn(a, colIndex){\r",
+											"\r",
+											"    a.sort(sortFunction);\r",
+											"\r",
+											"    function sortFunction(a, b) {\r",
+											"        if (a[colIndex] === b[colIndex]) {\r",
+											"            return 0;\r",
+											"        }\r",
+											"        else {\r",
+											"            return (a[colIndex] < b[colIndex]) ? -1 : 1;\r",
+											"        }\r",
+											"    }\r",
+											"\r",
+											"    return a;\r",
+											"}\r",
+											"var top5 = 0;\r",
+											"for(var outerindex = 0; outerindex < sortedArray.length; outerindex++){\r",
+											"    if(sortedArray[outerindex][0] != \"World\" && top5 < 5 && new_deaths != 1){\r",
+											"         console.log(sortedArray[outerindex][0]+\" : \"+sortedArray[outerindex][1]); \r",
+											"         top5++;\r",
+											"    }\r",
+											"  \r",
+											"};\r",
+											"\r",
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response time is less than 600ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(600);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"verify content type of response as json\", function () {\r",
+											"    \r",
+											"     pm.response.to.be.json;\r",
+											"\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://covid-19.dataflowkit.com/v1",
+									"protocol": "https",
+									"host": [
+										"covid-19",
+										"dataflowkit",
+										"com"
+									],
+									"path": [
+										"v1"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Paypal",
+					"item": [
+						{
+							"name": "paypalpost",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "ECKib81M3j17I1DDBcrS6A3TwiJtHBQtcUmix1WufWyeJ7egUGkXE17qaEMDMyuUkHlvw13F4h8vFwdB",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "AdlqupUrnU8oXOy-k_LC4AOgn4YjDhYHl542Zxv9PloUHe9GvDO9ZtuM8mKhT7Qkca-ktQxbHWFj-0Im",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer \"A21AAEkaNF_oRmgAkNLUqtGFcm7U8vBxhIRFQ1tdOa9qZvfbZjheOMoXwWqBC9Je6hytz4unA0S01yeYT1Z9UAITotocRp0_Q\",",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "grant_type",
+											"value": "client_credentials",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "https://api.sandbox.paypal.com/v1/oauth2/token",
+									"protocol": "https",
+									"host": [
+										"api",
+										"sandbox",
+										"paypal",
+										"com"
+									],
+									"path": [
+										"v1",
+										"oauth2",
+										"token"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "newProductCreation",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "8e5baa85-791b-4aaa-8d71-a88e688a60a9",
+										"exec": [
+											"  // get response\r",
+											"    var resp = pm.response.json(); \r",
+											"    var prod_resp;\r",
+											"    console.log(pm.variables.get(\"paypalBearerAuth\"))\r",
+											"\r",
+											"    pm.sendRequest({\r",
+											"        url:\"https://api.sandbox.paypal.com/v1/catalogs/products/\"+resp.id,\r",
+											"        method: 'GET',\r",
+											"        header: {\r",
+											"            Authorization: \"Bearer \"+ pm.variables.get(\"paypalBearerAuth\")\r",
+											"            }\r",
+											"            }, function (err, response) {\r",
+											"              var  prod_resp = response.text()\r",
+											"              console.log(prod_resp)\r",
+											"         pm.test(\"Verify the response contains category as expected\", function () {\r",
+											"    pm.expect(prod_resp).to.include(\"category\");\r",
+											"});\r",
+											"pm.test(\"Verify the response contains type as expected\", function () {\r",
+											"    pm.expect(prod_resp).to.include(\"type\");\r",
+											"});\r",
+											"\r",
+											"\r",
+											"        });"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"content-type": true
+								}
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer A21AAER58iRlM4W4gRNpiYIc3cZ0I2MTOuUavyPiyBKhtiOcLn90fenIZG4QPiLy5sB0qDViQSFjTz9HMPzWbiBhYltTFNB6A",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "PayPal-Request-Id",
+										"value": "PROD-1TX30499BG5510335",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"Video Streaming Service\",\r\n  \"description\": \"Video streaming service\",\r\n  \"type\": \"SERVICE\",\r\n  \"category\": \"SOFTWARE\",\r\n  \"image_url\": \"https://example.com/streaming.jpg\",\r\n  \"home_url\": \"https://example.com/home\"\r\n}"
+								},
+								"url": {
+									"raw": "https://api.sandbox.paypal.com/v1/catalogs/products",
+									"protocol": "https",
+									"host": [
+										"api",
+										"sandbox",
+										"paypal",
+										"com"
+									],
+									"path": [
+										"v1",
+										"catalogs",
+										"products"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "search created product",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer A21AAEkaNF_oRmgAkNLUqtGFcm7U8vBxhIRFQ1tdOa9qZvfbZjheOMoXwWqBC9Je6hytz4unA0S01yeYT1Z9UAITotocRp0_Q",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://api.sandbox.paypal.com/v1/catalogs/products/PROD-34G742613H887534J",
+									"protocol": "https",
+									"host": [
+										"api",
+										"sandbox",
+										"paypal",
+										"com"
+									],
+									"path": [
+										"v1",
+										"catalogs",
+										"products",
+										"PROD-34G742613H887534J"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "3e333cb5-5ddd-4f56-b8b4-217c86ee0f82",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "58b2c2c8-2a48-41b4-b865-8685df7536f9",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "db62f943-4680-4de8-8285-f5bd23b4e75a",
+			"key": "paypalBearerAuth",
+			"value": "A21AAER58iRlM4W4gRNpiYIc3cZ0I2MTOuUavyPiyBKhtiOcLn90fenIZG4QPiLy5sB0qDViQSFjTz9HMPzWbiBhYltTFNB6A",
+			"type": "string"
+		}
+	],
+	"protocolProfileBehavior": {}
+}
