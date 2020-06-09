@@ -1,0 +1,199 @@
+{
+	"info": {
+		"_postman_id": "4d5b058a-91da-4ee3-8e97-a7ab2430cd96",
+		"name": "60days API Copy",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Day2",
+			"item": [
+				{
+					"name": "bestbuy",
+					"item": [
+						{
+							"name": "productbased on postalcode",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://api.bestbuy.com/v1/stores(area(02864,50))+products(manufacturer=canon&salePrice<1000)?show=storeId,name,products.sku,products.name&apiKey=qUh3qMK14GdwAs9bO59QRSCJ",
+									"protocol": "https",
+									"host": [
+										"api",
+										"bestbuy",
+										"com"
+									],
+									"path": [
+										"v1",
+										"stores(area(02864,50))+products(manufacturer=canon&salePrice<1000)"
+									],
+									"query": [
+										{
+											"key": "show",
+											"value": "storeId,name,products.sku,products.name"
+										},
+										{
+											"key": "apiKey",
+											"value": "qUh3qMK14GdwAs9bO59QRSCJ"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "regular and selling price of iphone",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://api.bestbuy.com/v1/products(search=iphone 8 plus)?show=salePrice,regularPrice&apiKey=qUh3qMK14GdwAs9bO59QRSCJ",
+									"protocol": "https",
+									"host": [
+										"api",
+										"bestbuy",
+										"com"
+									],
+									"path": [
+										"v1",
+										"products(search=iphone 8 plus)"
+									],
+									"query": [
+										{
+											"key": "show",
+											"value": "salePrice,regularPrice"
+										},
+										{
+											"key": "apiKey",
+											"value": "qUh3qMK14GdwAs9bO59QRSCJ"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "canon products price range",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://api.bestbuy.com/v1/products(manufacturer=canon&(salePrice>=1000&salePrice<=1500))?format=xml&apiKey=qUh3qMK14GdwAs9bO59QRSCJ",
+									"protocol": "https",
+									"host": [
+										"api",
+										"bestbuy",
+										"com"
+									],
+									"path": [
+										"v1",
+										"products(manufacturer=canon&(salePrice>=1000&salePrice<=1500))"
+									],
+									"query": [
+										{
+											"key": "format",
+											"value": "xml"
+										},
+										{
+											"key": "apiKey",
+											"value": "qUh3qMK14GdwAs9bO59QRSCJ"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Pickup availability",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://api.bestbuy.com/v1/stores(region=RI)+products(search=iphone 8 plus)?show=name,region,products.inStoreAvailability,products.name,products.description&apiKey=qUh3qMK14GdwAs9bO59QRSCJ&inStoreAvailability=true",
+									"protocol": "https",
+									"host": [
+										"api",
+										"bestbuy",
+										"com"
+									],
+									"path": [
+										"v1",
+										"stores(region=RI)+products(search=iphone 8 plus)"
+									],
+									"query": [
+										{
+											"key": "show",
+											"value": "name,region,products.inStoreAvailability,products.name,products.description"
+										},
+										{
+											"key": "apiKey",
+											"value": "qUh3qMK14GdwAs9bO59QRSCJ"
+										},
+										{
+											"key": "inStoreAvailability",
+											"value": "true"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "c519ad6e-f38d-4590-8c3b-8529815d5b49",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "39d74225-6e70-4b75-8047-d0a586ea1a68",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "c2a4d3e7-9aba-4d72-9375-b2de65358c44",
+			"key": "paypalBearerAuth",
+			"value": "A21AAER58iRlM4W4gRNpiYIc3cZ0I2MTOuUavyPiyBKhtiOcLn90fenIZG4QPiLy5sB0qDViQSFjTz9HMPzWbiBhYltTFNB6A",
+			"type": "string"
+		},
+		{
+			"id": "18c8b786-2fc3-49ce-bb06-4a74936477d9",
+			"key": "mumbai",
+			"value": "1275339",
+			"type": "string"
+		},
+		{
+			"id": "2365b96b-ce9e-4df4-ace3-7d7c08cc9e27",
+			"key": "apikey",
+			"value": "63ba265769b16344f4f41db6bcd793f3",
+			"type": "string"
+		},
+		{
+			"id": "64a4a752-d465-4da0-a531-2cfa822b1ac6",
+			"key": "5days",
+			"value": "432000",
+			"type": "string"
+		}
+	],
+	"protocolProfileBehavior": {}
+}

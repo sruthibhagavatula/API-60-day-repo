@@ -34,3 +34,18 @@ Automation Steps:
 #2) Create multiple products [using dataprovider + RestAssured + TestNG]
 
 #3) Verify that the created products are listed
+
+
+1)bestbuy.com
+
+Manually Create your own account:
+
+Endpoint : https://developer.bestbuy.com/
+Automation Steps:
+1.Find the store name, address and distance near to postal code 02864 for product 
+  as part of this API, direct postal code is not accessible, hence i have given area within 50mts radius
+  
+2. Find all the canon products of price range between $1000-$1500
+  as part of this API, i searched for canon products in between 1000 - 1500
+3. Get the regular and selling price for iPhone8 
+4. Find the stores having store pick-up availability of iPhone8 Pro in stores in RI region
