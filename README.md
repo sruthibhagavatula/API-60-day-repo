@@ -49,3 +49,6 @@ Automation Steps:
   as part of this API, i searched for canon products in between 1000 - 1500
 3. Get the regular and selling price for iPhone8 
 4. Find the stores having store pick-up availability of iPhone8 Pro in stores in RI region
+
+2)Weatherma API:
+ find the weather forecast of major city in india which are having Rain and Haze.
