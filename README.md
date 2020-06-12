@@ -52,3 +52,5 @@ Automation Steps:
 
 2)Weatherma API:
  find the weather forecast of major city in india which are having Rain and Haze.
+ 
+4) Added postman json for zoho assignment
