@@ -49,15 +49,20 @@ public class RoomBooking extends KeyGeneration {
 	
 	 bookingRef = bookingsresp.get("booking.reference");
 	
+	 
 	System.out.println(" Booking Reference : " +bookingRef );
-	resp = RestAssured
+	}
+	
+	public void deleteBooking()
+	{
+		Response delresp = RestAssured
 			.given()
 			.headers(headerVal)
 			.log().all()
-			.get("/bookings/"+ bookingRef);
+			.delete("/bookings/"+ bookingRef);
 
-	resp.prettyPrint();
+	//delresp.prettyPrint();
 
 	}
 	
-}
+	}
