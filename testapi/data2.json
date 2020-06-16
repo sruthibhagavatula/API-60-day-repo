@@ -1,0 +1,25 @@
+{
+    "stay": {
+        "checkIn": "2020-06-16",
+        "checkOut": "2020-06-17"
+    },
+    "occupancies": [
+        {
+            "rooms": 1,
+            "adults": 1,
+            "children": 0
+        }
+        
+    ],
+         
+ "rooms": {
+        "included": true,
+        "room": [
+            "DBL.SU"
+        ]
+    },
+    "destination": {
+        "code": "HYD"
+    }
+    
+}
