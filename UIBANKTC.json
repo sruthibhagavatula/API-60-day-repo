@@ -1,0 +1,243 @@
+{
+	"info": {
+		"_postman_id": "156401ee-7300-429a-a141-5218cb9f5ccb",
+		"name": "UIBANKTC",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "user registration",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json, text/plain, */*"
+					},
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.106 Safari/537.36"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"firstName\":\"sruthibhagavatula\",\"title\":\"ms\",\"middleName\":\"\",\"lastName\":\"bhagavatula\",\"gender\":\"female\",\"employmentStatus\":\"Full-time\",\"age\":\"29/04/1991\",\"maritalStatus\":\"Single\",\"numberOfDependents\":1,\"username\":\"sruthi19\",\"email\":\"bhagavatulasruthi1@yahoo.com\",\"password\":\"sruthi29\",\"type\":\"customer\"}"
+				},
+				"url": {
+					"raw": "https://uibank-api.azurewebsites.net/api/users/",
+					"protocol": "https",
+					"host": [
+						"uibank-api",
+						"azurewebsites",
+						"net"
+					],
+					"path": [
+						"api",
+						"users",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json, text/plain, */*"
+					},
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.106 Safari/537.36"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"username\":\"sruthir91\",\"password\":\"sruthi29\"}",
+					"options": {
+						"raw": {}
+					}
+				},
+				"url": {
+					"raw": "https://uibank-api.azurewebsites.net/api/users/login",
+					"protocol": "https",
+					"host": [
+						"uibank-api",
+						"azurewebsites",
+						"net"
+					],
+					"path": [
+						"api",
+						"users",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "account details",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json, text/plain, */*"
+					},
+					{
+						"key": "Authorization",
+						"value": "mIEw1peH5fUlNJqTctNppaRWZeYeRSjNc5QiHj9ntAfYFB4PhL6iwVwZ7Dy0vyHo"
+					},
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.106 Safari/537.36"
+					}
+				],
+				"url": {
+					"raw": "https://uibank-api.azurewebsites.net/api/accounts?filter[where][userId]=5ef08b67e29f950044ba311b",
+					"protocol": "https",
+					"host": [
+						"uibank-api",
+						"azurewebsites",
+						"net"
+					],
+					"path": [
+						"api",
+						"accounts"
+					],
+					"query": [
+						{
+							"key": "filter[where][userId]",
+							"value": "5ef08b67e29f950044ba311b"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "accountcreation",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json, text/plain, */*"
+					},
+					{
+						"key": "Authorization",
+						"value": "mIEw1peH5fUlNJqTctNppaRWZeYeRSjNc5QiHj9ntAfYFB4PhL6iwVwZ7Dy0vyHo"
+					},
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.106 Safari/537.36"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"friendlyName\":\"sruthi\",\"type\":\"savings\",\"userId\":\"5ef08b67e29f950044ba311b\",\"balance\":100,\"accountNumber\":45634344}"
+				},
+				"url": {
+					"raw": "https://uibank-api.azurewebsites.net/api/accounts",
+					"protocol": "https",
+					"host": [
+						"uibank-api",
+						"azurewebsites",
+						"net"
+					],
+					"path": [
+						"api",
+						"accounts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "applyforloan",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json, text/plain, */*"
+					},
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.106 Safari/537.36"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"email\":\"bhagavatulasruthi@yahoo.com\",\"amount\":100000,\"term\":5,\"income\":1,\"age\":29}"
+				},
+				"url": {
+					"raw": "https://uibank-api.azurewebsites.net/api/quotes/newquote",
+					"protocol": "https",
+					"host": [
+						"uibank-api",
+						"azurewebsites",
+						"net"
+					],
+					"path": [
+						"api",
+						"quotes",
+						"newquote"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "loan details",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json, text/plain, */*"
+					},
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.106 Safari/537.36"
+					}
+				],
+				"url": {
+					"raw": "https://uibank-api.azurewebsites.net/api/quotes/5ef08cece29f950044ba3125",
+					"protocol": "https",
+					"host": [
+						"uibank-api",
+						"azurewebsites",
+						"net"
+					],
+					"path": [
+						"api",
+						"quotes",
+						"5ef08cece29f950044ba3125"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
