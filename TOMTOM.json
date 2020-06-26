@@ -1,0 +1,1520 @@
+{
+	"info": {
+		"_postman_id": "aceefe06-cf03-44cc-a3df-f75034c87e35",
+		"name": "60days API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Day1",
+			"item": [
+				{
+					"name": "Covid API",
+					"item": [
+						{
+							"name": "Response of all countries",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://covid-19.dataflowkit.com/v1",
+									"protocol": "https",
+									"host": [
+										"covid-19",
+										"dataflowkit",
+										"com"
+									],
+									"path": [
+										"v1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Response of Current country",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "e4351525-141e-41f2-8b24-6599f6eb0f73",
+										"exec": [
+											"pm.test(\"Status code is 200 for Covid cases in India\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"pm.test(\"Covid cases in India Json response\", function () {\r",
+											"   pm.response.to.be.json;\r",
+											"});\r",
+											"pm.test(\"Response time is less than 600ms for covid cases in India\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(600);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://covid-19.dataflowkit.com/v1/India",
+									"protocol": "https",
+									"host": [
+										"covid-19",
+										"dataflowkit",
+										"com"
+									],
+									"path": [
+										"v1",
+										"India"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Top5 countries with highest new cases",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "0c202bcb-f780-4570-8a68-7a8bd3556ae1",
+										"exec": [
+											"var resp = pm.response.json();\r",
+											"console.log(resp);\r",
+											"\r",
+											"resp.data.rows.forEach(function(entry){\r",
+											"    var country = entry.country;\r",
+											"    var new_cases = entry.new_cases;\r",
+											"    if(country != \"World\"){\r",
+											"        console.log(country+\" : \"+new_cases);\r",
+											"     }   \r",
+											"\r",
+											"})\r",
+											"\r",
+											"pm.test(\"Status code is 200 for Covid cases in India\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"pm.test(\"Covid cases in India Json response\", function () {\r",
+											"   pm.response.to.be.json;\r",
+											"});\r",
+											"pm.test(\"Response time is less than 600ms for covid cases in India\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(600);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://corona-virus-stats.herokuapp.com/api/v1/cases/countries-search?page=1&how=asc&limit=5&order=new_cases",
+									"protocol": "https",
+									"host": [
+										"corona-virus-stats",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"api",
+										"v1",
+										"cases",
+										"countries-search"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "cou",
+											"value": "5",
+											"disabled": true
+										},
+										{
+											"key": "how",
+											"value": "asc"
+										},
+										{
+											"key": "limit",
+											"value": "5"
+										},
+										{
+											"key": "order",
+											"value": "new_cases"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Top5 countries with lowest new deaths",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "49293926-1331-4c57-b873-c224fb8263c1",
+										"exec": [
+											"var resp = pm.response.json();\r",
+											"console.log(resp);\r",
+											"\r",
+											"resp.data.rows.forEach(function(entry){\r",
+											"    var country = entry.country;\r",
+											"    var new_deaths = entry.new_deaths;\r",
+											"     console.log(country+\" : \"+new_deaths);\r",
+											"     \r",
+											"\r",
+											"})\r",
+											"pm.test(\"Status code is 200 for Covid cases in India\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"pm.test(\"Covid cases in India Json response\", function () {\r",
+											"   pm.response.to.be.json;\r",
+											"});\r",
+											"pm.test(\"Response time is less than 600ms for covid cases in India\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(600);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://corona-virus-stats.herokuapp.com/api/v1/cases/countries-search?page=1&how=asc&limit=5&order=new_deaths",
+									"protocol": "https",
+									"host": [
+										"corona-virus-stats",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"api",
+										"v1",
+										"cases",
+										"countries-search"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "cou",
+											"value": "5",
+											"disabled": true
+										},
+										{
+											"key": "how",
+											"value": "asc"
+										},
+										{
+											"key": "limit",
+											"value": "5"
+										},
+										{
+											"key": "order",
+											"value": "new_deaths"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Highest New Cases",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "720a1a67-084d-4f08-81db-0b862594c6ec",
+										"exec": [
+											"  \r",
+											"// get response\r",
+											"var resp = pm.response.json();\r",
+											"console.log(resp);\r",
+											"\r",
+											"//print resp count\r",
+											"var count = resp.length;\r",
+											"console.log(count);\r",
+											"var countrieswithNewCasesInRecentDay = 0;\r",
+											"console.log(\"count: \"+count);\r",
+											"        var currTime = new Date().getTime();\r",
+											"     //   console.log(\"currTime :\"+currTime);\r",
+											"        var last24thHr = 24*60*60*1000\r",
+											"      //  console.log(\"last24thHr :\"+last24thHr)\r",
+											"        var expectedLastUpdated = currTime - last24thHr\r",
+											"   var countrieswithNewCasesArray = [];\r",
+											"   for(var i = 0; i < count-1; i++){\r",
+											"        var innerArray = [];\r",
+											"    var country = resp[i][\"Country_text\"];\r",
+											"    var LastUpdated = resp[i][\"Last Update\"];\r",
+											"    var lastUpdatedMS = new Date(LastUpdated).getTime();\r",
+											"      var new_cases = resp[i][\"New Cases_text\"];\r",
+											"    if(lastUpdatedMS > expectedLastUpdated &&  new_cases != \"\")\r",
+											"   \r",
+											"    { \r",
+											"        // console.log(country+\" : \"+new_cases);\r",
+											"          var new_cases_count = new_cases.replace(/[+,]/g, '');\r",
+											"     //   console.log(country+\" : \"+new_cases_count);\r",
+											"        innerArray.push(country,Number(new_cases_count));\r",
+											"        countrieswithNewCasesInRecentDay++;\r",
+											"        countrieswithNewCasesArray.push(innerArray);\r",
+											"         \r",
+											"    }\r",
+											"//});\r",
+											"   \r",
+											"};\r",
+											"console.log(\"countrieswithNewCasesInRecentDay: \"+countrieswithNewCasesInRecentDay);\r",
+											"console.log(\"countrieswithNewCasesArray: \"+countrieswithNewCasesArray.length);\r",
+											"\r",
+											"var sortedArray = sortByColumn(countrieswithNewCasesArray,1);\r",
+											"function sortByColumn(a, colIndex){\r",
+											"\r",
+											"    a.sort(sortFunction);\r",
+											"\r",
+											"    function sortFunction(a, b) {\r",
+											"        if (a[colIndex] === b[colIndex]) {\r",
+											"            return 0;\r",
+											"        }\r",
+											"        else {\r",
+											"            return (a[colIndex] > b[colIndex]) ? -1 : 1;\r",
+											"        }\r",
+											"    }\r",
+											"\r",
+											"    return a;\r",
+											"}\r",
+											"var top5 = 0;\r",
+											"for(var outerindex = 0; outerindex < sortedArray.length; outerindex++){\r",
+											"    if(sortedArray[outerindex][0] != \"World\" && top5 < 5){\r",
+											"         console.log(sortedArray[outerindex][0]+\" : \"+sortedArray[outerindex][1]); \r",
+											"         top5++;\r",
+											"    }\r",
+											"  \r",
+											"};\r",
+											"\r",
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response time is less than 600ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(600);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"verify content type of response as json\", function () {\r",
+											"    \r",
+											"     pm.response.to.be.json;\r",
+											"\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://covid-19.dataflowkit.com/v1",
+									"protocol": "https",
+									"host": [
+										"covid-19",
+										"dataflowkit",
+										"com"
+									],
+									"path": [
+										"v1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "sort",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "c0da8b21-f0af-43a7-88de-e607df73a95b",
+										"exec": [
+											"// get response\r",
+											"var resp = pm.response.json();\r",
+											"console.log(resp);\r",
+											"\r",
+											"//print resp count\r",
+											"var count = resp.length;\r",
+											"console.log(count);\r",
+											"\r",
+											"var countrieswithNewCasesInRecentDay = 0;\r",
+											"console.log(\"count: \"+count);\r",
+											"        var currTime = new Date().getTime();\r",
+											"     //   console.log(\"currTime :\"+currTime);\r",
+											"        var last24thHr = 24*60*60*1000\r",
+											"      //  console.log(\"last24thHr :\"+last24thHr)\r",
+											"\r",
+											"        var expectedLastUpdated = currTime - last24thHr\r",
+											"\r",
+											"\r",
+											"   for(var i = 0; i < count; i++){\r",
+											"    var country = resp[i][\"Country_text\"];\r",
+											"    var LastUpdated = resp[i][\"Last Update\"];\r",
+											"    var lastUpdatedMS = new Date(LastUpdated).getTime();\r",
+											"   \r",
+											"    pm.test(\"Test if New Cases_text updated in last 24hrs(Recent Day)\", function () {\r",
+											"         var new_cases = resp[i][\"New Cases_text\"];\r",
+											"    if( pm.expect(lastUpdatedMS).to.be.above(expectedLastUpdated) && pm.expect(new_cases).not.equal(\"\"))\r",
+											"    {  \r",
+											"        console.log(country+\" : \"+new_cases);\r",
+											"        countrieswithNewCasesInRecentDay++;\r",
+											"         \r",
+											"    }\r",
+											"});\r",
+											"   \r",
+											"};\r",
+											"console.log(\"countrieswithNewCasesInRecentDay: \"+countrieswithNewCasesInRecentDay);\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://covid-19.dataflowkit.com/v1",
+									"protocol": "https",
+									"host": [
+										"covid-19",
+										"dataflowkit",
+										"com"
+									],
+									"path": [
+										"v1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Lowest new Death cases",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "4eff4fda-9b99-47db-a1dd-f2fc03c3e65a",
+										"exec": [
+											"  \r",
+											"// get response\r",
+											"var resp = pm.response.json();\r",
+											"console.log(resp);\r",
+											"\r",
+											"//print resp count\r",
+											"var count = resp.length;\r",
+											"console.log(count);\r",
+											"var countrieswithlowestDeathCasesInRecentDay = 0;\r",
+											"console.log(\"count: \"+count);\r",
+											"        var currTime = new Date().getTime();\r",
+											"     //   console.log(\"currTime :\"+currTime);\r",
+											"        var last24thHr = 24*60*60*1000\r",
+											"      //  console.log(\"last24thHr :\"+last24thHr)\r",
+											"        var expectedLastUpdated = currTime - last24thHr\r",
+											"   var countrieswithlowestDeathCasesArray = [];\r",
+											"   for(var i = 0; i < count-1; i++){\r",
+											"        var innerArray = [];\r",
+											"    var country = resp[i][\"Country_text\"];\r",
+											"    var LastUpdated = resp[i][\"Last Update\"];\r",
+											"    var lastUpdatedMS = new Date(LastUpdated).getTime();\r",
+											"      var new_deaths = resp[i][\"New Deaths_text\"];\r",
+											"    if(lastUpdatedMS > expectedLastUpdated &&   new_deaths!= \"\")\r",
+											"   \r",
+											"    { \r",
+											"         var new_deaths_count = new_deaths.replace(/[+,]/g, '');\r",
+											"            innerArray.push(country,Number(new_deaths_count));\r",
+											"        countrieswithlowestDeathCasesInRecentDay++;\r",
+											"        countrieswithlowestDeathCasesArray.push(innerArray);\r",
+											"         \r",
+											"    }\r",
+											"//});\r",
+											"   \r",
+											"};\r",
+											"console.log(\"countrieswithlowestDeathCasesInRecentDay: \"+countrieswithlowestDeathCasesInRecentDay);\r",
+											"console.log(\"countrieswithlowestDeathCasesArray: \"+countrieswithlowestDeathCasesArray.length);\r",
+											"\r",
+											"var sortedArray = sortByColumn(countrieswithlowestDeathCasesArray,1);\r",
+											"function sortByColumn(a, colIndex){\r",
+											"\r",
+											"    a.sort(sortFunction);\r",
+											"\r",
+											"    function sortFunction(a, b) {\r",
+											"        if (a[colIndex] === b[colIndex]) {\r",
+											"            return 0;\r",
+											"        }\r",
+											"        else {\r",
+											"            return (a[colIndex] < b[colIndex]) ? -1 : 1;\r",
+											"        }\r",
+											"    }\r",
+											"\r",
+											"    return a;\r",
+											"}\r",
+											"var top5 = 0;\r",
+											"for(var outerindex = 0; outerindex < sortedArray.length; outerindex++){\r",
+											"    if(sortedArray[outerindex][0] != \"World\" && top5 < 5 && new_deaths != 1){\r",
+											"         console.log(sortedArray[outerindex][0]+\" : \"+sortedArray[outerindex][1]); \r",
+											"         top5++;\r",
+											"    }\r",
+											"  \r",
+											"};\r",
+											"\r",
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response time is less than 600ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(600);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"verify content type of response as json\", function () {\r",
+											"    \r",
+											"     pm.response.to.be.json;\r",
+											"\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://covid-19.dataflowkit.com/v1",
+									"protocol": "https",
+									"host": [
+										"covid-19",
+										"dataflowkit",
+										"com"
+									],
+									"path": [
+										"v1"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Paypal",
+					"item": [
+						{
+							"name": "paypalpost",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "Sruthi@29",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "sruthir91@gmail.com",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "grant_type",
+											"value": "client_credentials",
+											"type": "text"
+										}
+									],
+									"options": {
+										"urlencoded": {}
+									}
+								},
+								"url": {
+									"raw": "https://api.sandbox.paypal.com/v1/oauth2/token",
+									"protocol": "https",
+									"host": [
+										"api",
+										"sandbox",
+										"paypal",
+										"com"
+									],
+									"path": [
+										"v1",
+										"oauth2",
+										"token"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "newProductCreation",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "8e5baa85-791b-4aaa-8d71-a88e688a60a9",
+										"exec": [
+											"  // get response\r",
+											"    var resp = pm.response.json(); \r",
+											"    var prod_resp;\r",
+											"    console.log(pm.variables.get(\"paypalBearerAuth\"))\r",
+											"\r",
+											"    pm.sendRequest({\r",
+											"        url:\"https://api.sandbox.paypal.com/v1/catalogs/products/\"+resp.id,\r",
+											"        method: 'GET',\r",
+											"        header: {\r",
+											"            Authorization: \"Bearer \"+ pm.variables.get(\"paypalBearerAuth\")\r",
+											"            }\r",
+											"            }, function (err, response) {\r",
+											"              var  prod_resp = response.text()\r",
+											"              console.log(prod_resp)\r",
+											"         pm.test(\"Verify the response contains category as expected\", function () {\r",
+											"    pm.expect(prod_resp).to.include(\"category\");\r",
+											"});\r",
+											"pm.test(\"Verify the response contains type as expected\", function () {\r",
+											"    pm.expect(prod_resp).to.include(\"type\");\r",
+											"});\r",
+											"\r",
+											"\r",
+											"        });"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"content-type": true
+								}
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer A21AAER58iRlM4W4gRNpiYIc3cZ0I2MTOuUavyPiyBKhtiOcLn90fenIZG4QPiLy5sB0qDViQSFjTz9HMPzWbiBhYltTFNB6A",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "PayPal-Request-Id",
+										"value": "PROD-1TX30499BG5510335",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"Video Streaming Service\",\r\n  \"description\": \"Video streaming service\",\r\n  \"type\": \"SERVICE\",\r\n  \"category\": \"SOFTWARE\",\r\n  \"image_url\": \"https://example.com/streaming.jpg\",\r\n  \"home_url\": \"https://example.com/home\"\r\n}",
+									"options": {
+										"raw": {}
+									}
+								},
+								"url": {
+									"raw": "https://api.sandbox.paypal.com/v1/catalogs/products",
+									"protocol": "https",
+									"host": [
+										"api",
+										"sandbox",
+										"paypal",
+										"com"
+									],
+									"path": [
+										"v1",
+										"catalogs",
+										"products"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "search created product",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer A21AAEkaNF_oRmgAkNLUqtGFcm7U8vBxhIRFQ1tdOa9qZvfbZjheOMoXwWqBC9Je6hytz4unA0S01yeYT1Z9UAITotocRp0_Q",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://api.sandbox.paypal.com/v1/catalogs/products/PROD-34G742613H887534J",
+									"protocol": "https",
+									"host": [
+										"api",
+										"sandbox",
+										"paypal",
+										"com"
+									],
+									"path": [
+										"v1",
+										"catalogs",
+										"products",
+										"PROD-34G742613H887534J"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Day2",
+			"item": [
+				{
+					"name": "Weatherman",
+					"item": [
+						{
+							"name": "weatherforecastmajorcity",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "api.openweathermap.org/data/2.5/weather?id={{mumbai}}&appid={{apikey}}",
+									"host": [
+										"api",
+										"openweathermap",
+										"org"
+									],
+									"path": [
+										"data",
+										"2.5",
+										"weather"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "{{mumbai}}"
+										},
+										{
+											"key": "appid",
+											"value": "{{apikey}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "mumbaiweather last 5 days",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "api.openweathermap.org/data/2.5/group?id=275339&appid={{apikey}}",
+									"host": [
+										"api",
+										"openweathermap",
+										"org"
+									],
+									"path": [
+										"data",
+										"2.5",
+										"group"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "275339"
+										},
+										{
+											"key": "appid",
+											"value": "{{apikey}}"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "bestbuy",
+					"item": [
+						{
+							"name": "productbased on postalcode",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://api.bestbuy.com/v1/stores(area(02864,50))+products(manufacturer=canon&salePrice<1000)?show=storeId,name,products.sku,products.name&apiKey=qUh3qMK14GdwAs9bO59QRSCJ",
+									"protocol": "https",
+									"host": [
+										"api",
+										"bestbuy",
+										"com"
+									],
+									"path": [
+										"v1",
+										"stores(area(02864,50))+products(manufacturer=canon&salePrice<1000)"
+									],
+									"query": [
+										{
+											"key": "show",
+											"value": "storeId,name,products.sku,products.name"
+										},
+										{
+											"key": "apiKey",
+											"value": "qUh3qMK14GdwAs9bO59QRSCJ"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "regular and selling price of iphone",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://api.bestbuy.com/v1/products(search=iphone 8 plus)?show=salePrice,regularPrice&apiKey=qUh3qMK14GdwAs9bO59QRSCJ",
+									"protocol": "https",
+									"host": [
+										"api",
+										"bestbuy",
+										"com"
+									],
+									"path": [
+										"v1",
+										"products(search=iphone 8 plus)"
+									],
+									"query": [
+										{
+											"key": "show",
+											"value": "salePrice,regularPrice"
+										},
+										{
+											"key": "apiKey",
+											"value": "qUh3qMK14GdwAs9bO59QRSCJ"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "canon products price range",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://api.bestbuy.com/v1/products(manufacturer=canon&(salePrice>=1000&salePrice<=1500))?format=xml&apiKey=qUh3qMK14GdwAs9bO59QRSCJ",
+									"protocol": "https",
+									"host": [
+										"api",
+										"bestbuy",
+										"com"
+									],
+									"path": [
+										"v1",
+										"products(manufacturer=canon&(salePrice>=1000&salePrice<=1500))"
+									],
+									"query": [
+										{
+											"key": "format",
+											"value": "xml"
+										},
+										{
+											"key": "apiKey",
+											"value": "qUh3qMK14GdwAs9bO59QRSCJ"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Pickup availability",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://api.bestbuy.com/v1/stores(region=RI)+products(search=iphone 8 plus)?show=name,region,products.inStoreAvailability,products.name,products.description&apiKey=qUh3qMK14GdwAs9bO59QRSCJ&inStoreAvailability=true",
+									"protocol": "https",
+									"host": [
+										"api",
+										"bestbuy",
+										"com"
+									],
+									"path": [
+										"v1",
+										"stores(region=RI)+products(search=iphone 8 plus)"
+									],
+									"query": [
+										{
+											"key": "show",
+											"value": "name,region,products.inStoreAvailability,products.name,products.description"
+										},
+										{
+											"key": "apiKey",
+											"value": "qUh3qMK14GdwAs9bO59QRSCJ"
+										},
+										{
+											"key": "inStoreAvailability",
+											"value": "true"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Day3",
+			"item": [
+				{
+					"name": "Zoho",
+					"item": [
+						{
+							"name": "req1",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://accounts.zoho.com/oauth/v2/auth?scope=ZohoSubscriptions.fullaccess.all&client_id=1000.A5D1NLEPOW30R36610Y4YH1YUL0RGH&state=testing&response_type=code&redirect_uri=http://www.zoho.com/subscriptions&access_type=offline",
+									"protocol": "https",
+									"host": [
+										"accounts",
+										"zoho",
+										"com"
+									],
+									"path": [
+										"oauth",
+										"v2",
+										"auth"
+									],
+									"query": [
+										{
+											"key": "scope",
+											"value": "ZohoSubscriptions.fullaccess.all"
+										},
+										{
+											"key": "client_id",
+											"value": "1000.A5D1NLEPOW30R36610Y4YH1YUL0RGH"
+										},
+										{
+											"key": "state",
+											"value": "testing"
+										},
+										{
+											"key": "response_type",
+											"value": "code"
+										},
+										{
+											"key": "redirect_uri",
+											"value": "http://www.zoho.com/subscriptions"
+										},
+										{
+											"key": "access_type",
+											"value": "offline"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Day4",
+			"item": [
+				{
+					"name": "Hotel",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Day5",
+			"item": [
+				{
+					"name": "Cisco",
+					"item": [
+						{
+							"name": "searchRoom",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://webexapis.com/v1/teams",
+									"protocol": "https",
+									"host": [
+										"webexapis",
+										"com"
+									],
+									"path": [
+										"v1",
+										"teams"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				}
+			],
+			"auth": {
+				"type": "oauth2",
+				"oauth2": [
+					{
+						"key": "accessToken",
+						"value": "ZjRkOGJiOTYtZGQ0My00MWI4LTlmY2ItZWEwMjI1MjEyODMzZDE1YmUwOTQtYTcy_PF84_consumer",
+						"type": "string"
+					},
+					{
+						"key": "tokenType",
+						"type": "any"
+					},
+					{
+						"key": "addTokenTo",
+						"value": "header",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "a32319dc-4d7e-470b-a189-bc97350dc9e7",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "8dd0a250-8241-4e6c-984b-857f6aec5644",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Day6",
+			"item": [
+				{
+					"name": "uibank",
+					"item": [
+						{
+							"name": "verifylogin",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\":\"sruthir\",\r\n    \"password\":\"Pranathi75#\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://uibank.uipath.com/",
+									"protocol": "https",
+									"host": [
+										"uibank",
+										"uipath",
+										"com"
+									],
+									"path": [
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "register-account",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Upgrade-Insecure-Requests",
+										"value": "1"
+									},
+									{
+										"key": "User-Agent",
+										"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.106 Safari/537.36"
+									},
+									{
+										"key": "Accept",
+										"value": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\":\"sruthi123\",\r\n    \"password\":\"Sruthi@29\",\r\n    \"email\":\"sruthir91@gmail.com\",\r\n    \"firstname\":\"sruthi\",\r\n    \"Title\":\"Ms\",\r\n    \"middlename\":\"sruthi\",\r\n    \"lastname\":\"sruthi\",\r\n    \"sex\":\"Female\",\r\n    \"employmentstatus\":\"full-time\",\r\n    \"Age\":\"29/04/1991\",\r\n    \"Maritalstatus\":\"Unmarried\",\r\n    \"Numberofdependents\":\"1\"\r\n\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://uibank-api.azurewebsites.net/api/users/",
+									"protocol": "https",
+									"host": [
+										"uibank-api",
+										"azurewebsites",
+										"net"
+									],
+									"path": [
+										"api",
+										"users",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "day7",
+			"item": [
+				{
+					"name": "TOMTOM",
+					"item": [
+						{
+							"name": "Registerkey",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "",
+										"value": "",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"secret\": \"My very secret key\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://api.tomtom.com/geofencing/1/register?key={{tomtomapikey}}",
+									"protocol": "https",
+									"host": [
+										"api",
+										"tomtom",
+										"com"
+									],
+									"path": [
+										"geofencing",
+										"1",
+										"register"
+									],
+									"query": [
+										{
+											"key": "key",
+											"value": "{{tomtomapikey}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Addnewproject",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "",
+										"type": "text",
+										"value": ""
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"Store near my area\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://api.tomtom.com/geofencing/1/projects/project?key={{tomtomapikey}}&adminKey={{adminkey}}",
+									"protocol": "https",
+									"host": [
+										"api",
+										"tomtom",
+										"com"
+									],
+									"path": [
+										"geofencing",
+										"1",
+										"projects",
+										"project"
+									],
+									"query": [
+										{
+											"key": "key",
+											"value": "{{tomtomapikey}}"
+										},
+										{
+											"key": "adminKey",
+											"value": "{{adminkey}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "listprojects",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "",
+										"type": "text",
+										"value": ""
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://api.tomtom.com/geofencing/1/projects?key={{tomtomapikey}}",
+									"protocol": "https",
+									"host": [
+										"api",
+										"tomtom",
+										"com"
+									],
+									"path": [
+										"geofencing",
+										"1",
+										"projects"
+									],
+									"query": [
+										{
+											"key": "key",
+											"value": "{{tomtomapikey}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Regenerate key",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "",
+										"type": "text",
+										"value": ""
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"secret\": \"My very secret key\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://api.tomtom.com/geofencing/1/regenerateKey?key={{tomtomapikey}}",
+									"protocol": "https",
+									"host": [
+										"api",
+										"tomtom",
+										"com"
+									],
+									"path": [
+										"geofencing",
+										"1",
+										"regenerateKey"
+									],
+									"query": [
+										{
+											"key": "key",
+											"value": "{{tomtomapikey}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add fence",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "",
+										"type": "text",
+										"value": ""
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"No-fly zone 23\",\r\n  \"type\": \"Feature\",\r\n  \"geometry\": {\r\n    \"radius\": 75,\r\n    \"type\": \"Point\",\r\n    \"shapeType\": \"Circle\",\r\n    \"coordinates\": [-67.137343, 45.137451]\r\n  },\r\n  \"properties\": {\r\n    \"maxSpeedKmh\": 70\r\n  }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://api.tomtom.com/geofencing/1/projects/{{storeid}}/fence?key={{tomtomapikey}}&adminKey={{adminkey}}",
+									"protocol": "https",
+									"host": [
+										"api",
+										"tomtom",
+										"com"
+									],
+									"path": [
+										"geofencing",
+										"1",
+										"projects",
+										"{{storeid}}",
+										"fence"
+									],
+									"query": [
+										{
+											"key": "key",
+											"value": "{{tomtomapikey}}"
+										},
+										{
+											"key": "adminKey",
+											"value": "{{adminkey}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getfencedetails",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "",
+										"type": "text",
+										"value": ""
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"No-fly zone 23\",\r\n  \"type\": \"Feature\",\r\n  \"geometry\": {\r\n    \"radius\": 75,\r\n    \"type\": \"Point\",\r\n    \"shapeType\": \"Circle\",\r\n    \"coordinates\": [-67.137343, 45.137451]\r\n  },\r\n  \"properties\": {\r\n    \"maxSpeedKmh\": 70\r\n  }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://api.tomtom.com/geofencing/1/fences/{{fenceid}}?key={{tomtomapikey}}",
+									"protocol": "https",
+									"host": [
+										"api",
+										"tomtom",
+										"com"
+									],
+									"path": [
+										"geofencing",
+										"1",
+										"fences",
+										"{{fenceid}}"
+									],
+									"query": [
+										{
+											"key": "key",
+											"value": "{{tomtomapikey}}"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "3e333cb5-5ddd-4f56-b8b4-217c86ee0f82",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "58b2c2c8-2a48-41b4-b865-8685df7536f9",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "be37bf1b-4d4c-4171-bd48-7e0b6dc73118",
+			"key": "paypalBearerAuth",
+			"value": "A21AAER58iRlM4W4gRNpiYIc3cZ0I2MTOuUavyPiyBKhtiOcLn90fenIZG4QPiLy5sB0qDViQSFjTz9HMPzWbiBhYltTFNB6A"
+		},
+		{
+			"id": "0de0e310-2a3c-4b36-9bf5-be922c7c4b44",
+			"key": "mumbai",
+			"value": "1275339"
+		},
+		{
+			"id": "62053a1d-2ae7-47a9-89bf-43abf56994f5",
+			"key": "apikey",
+			"value": "63ba265769b16344f4f41db6bcd793f3"
+		},
+		{
+			"id": "50194d1b-1843-43a8-b04d-daccd7c23d26",
+			"key": "5days",
+			"value": "432000"
+		},
+		{
+			"id": "bc56031b-b193-4d23-84fa-3925af0da9b8",
+			"key": "tomtomapikey",
+			"value": "XXNjxGjqlqxcJ3oAE8zIGHHceSjIR1F6"
+		},
+		{
+			"id": "27a56faa-e677-48f4-acd9-a0d27e480388",
+			"key": "adminkey",
+			"value": "yXu2KG1yebIlZtHx9xwnNnMX1751w0dqwPrWm1uOoAyzZ5WF"
+		},
+		{
+			"id": "66f5a075-f4fe-4595-bdd8-cd18192f9af8",
+			"key": "storeid",
+			"value": "25c07368-e3c6-406f-a5fb-6e4d8699bde1"
+		},
+		{
+			"id": "97ee00d9-0a5f-4df2-9023-a075cae481ca",
+			"key": "fenceid",
+			"value": "000ca9a7-379a-4ae5-a1b5-1e5dba0e10bc"
+		}
+	],
+	"protocolProfileBehavior": {}
+}
